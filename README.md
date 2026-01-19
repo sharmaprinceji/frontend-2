@@ -1,16 +1,90 @@
-# React + Vite
+# 🖥️ **README for FRONTEND (`frontend/README.md`)**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```md
+# 💸 Expense Tracker Frontend (React)
 
-Currently, two official plugins are available:
+A minimal UI for recording and tracking personal expenses via the backend API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This UI is intentionally simple and focuses on correctness & clarity over styling.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+✔ Add expenses (amount, category, description, date)  
+✔ Display full expense list  
+✔ Filter by category  
+✔ Sort by newest date  
+✔ Display total of visible expenses  
+✔ Automatically refresh after adding new expense  
+✔ Decimal-safe rendering for money values  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧰 Tech Stack
+
+- React (Vite)
+- Axios for API requests
+- UUID for idempotency tokens
+- CSS (simple custom styling)
+
+---
+
+## 📡 API Integration
+
+Uses environment variable:
+
+VITE_API_URL=http://localhost:4000
+
+yaml
+Copy code
+
+Connects to backend endpoints:
+- `POST /expenses`
+- `GET /expenses`
+
+---
+
+## 💳 Money Display Handling
+
+Backend uses `Decimal128`, so frontend normalizes values:
+
+```js
+const getAmount = (amount) => {
+  if (typeof amount === "object" && amount.$numberDecimal) {
+    return Number(amount.$numberDecimal);
+  }
+  return Number(amount);
+};
+Ensures accurate total + display.
+
+📊 Real-World Behavior
+Handles:
+
+Duplicate clicks (idempotent backend)
+
+Browser refreshes (backend persistence)
+
+Network retries (UUID tokens)
+
+🏗️ Setup & Usage
+1. Install
+sh
+Copy code
+cd frontend
+npm install
+2. Configure Env
+Create .env:
+
+ini
+Copy code
+VITE_API_URL=http://localhost:4000
+3. Run
+sh
+Copy code
+npm run dev
+Frontend starts at:
+
+arduino
+Copy code
+http://localhost:5173
