@@ -1,0 +1,40 @@
+.expense-list-container {
+  margin-top: 20px;
+}
+
+.controls-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.controls-row select {
+  padding: 8px;
+  border: 1px solid #aaa;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.total-display {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expense-table th,
+.expense-table td {
+  border: 1px solid #ccc;
+  text-align: left;
+  padding: 8px;
+}
+
+.expense-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
